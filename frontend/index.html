@@ -3,61 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Портал для врачей</title>
+    <title>MedPortal - Портал для врачей</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- Экран авторизации -->
     <div id="auth-screen" class="screen active">
         <div class="auth-container">
-            <h1>Портал для врачей</h1>
+            <div class="auth-card">
+                <h1>🏥 MedPortal</h1>
+                <p class="subtitle">Современная система управления пациентами</p>
 
-            <div id="login-form" class="auth-form active">
-                <h2>Вход в систему</h2>
-                <form onsubmit="handleLogin(event)">
-                    <div class="form-group">
-                        <label for="login-username">Имя пользователя</label>
-                        <input type="text" id="login-username" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="login-password">Пароль</label>
-                        <input type="password" id="login-password" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Войти</button>
-                </form>
-                <p class="auth-switch">
-                    Нет аккаунта? <a href="#" onclick="showRegister()">Зарегистрироваться</a>
-                </p>
-            </div>
+                <div id="login-form" class="auth-form active">
+                    <h2>Вход в систему</h2>
+                    <form onsubmit="handleLogin(event)">
+                        <div class="form-group">
+                            <label for="login-username">Имя пользователя</label>
+                            <input type="text" id="login-username" placeholder="Введите имя пользователя" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Пароль</label>
+                            <input type="password" id="login-password" placeholder="Введите пароль" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Войти</button>
+                    </form>
+                    <p class="auth-switch">
+                        Нет аккаунта? <a href="#" onclick="showRegister(); return false;">Зарегистрироваться</a>
+                    </p>
+                </div>
 
-            <div id="register-form" class="auth-form">
-                <h2>Регистрация</h2>
-                <form onsubmit="handleRegister(event)">
-                    <div class="form-group">
-                        <label for="reg-username">Имя пользователя</label>
-                        <input type="text" id="reg-username" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="reg-email">Email</label>
-                        <input type="email" id="reg-email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="reg-full-name">ФИО</label>
-                        <input type="text" id="reg-full-name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="reg-specialization">Специализация</label>
-                        <input type="text" id="reg-specialization">
-                    </div>
-                    <div class="form-group">
-                        <label for="reg-password">Пароль</label>
-                        <input type="password" id="reg-password" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
-                </form>
-                <p class="auth-switch">
-                    Уже есть аккаунт? <a href="#" onclick="showLogin()">Войти</a>
-                </p>
+                <div id="register-form" class="auth-form">
+                    <h2>Регистрация</h2>
+                    <form onsubmit="handleRegister(event)">
+                        <div class="form-group">
+                            <label for="reg-username">Имя пользователя</label>
+                            <input type="text" id="reg-username" placeholder="Введите имя пользователя" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-email">Email</label>
+                            <input type="email" id="reg-email" placeholder="Введите email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-full-name">ФИО</label>
+                            <input type="text" id="reg-full-name" placeholder="Введите ФИО" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-specialization">Специализация</label>
+                            <input type="text" id="reg-specialization" placeholder="Введите специализацию">
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-password">Пароль</label>
+                            <input type="password" id="reg-password" placeholder="Введите пароль" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Зарегистрироваться</button>
+                    </form>
+                    <p class="auth-switch">
+                        Уже есть аккаунт? <a href="#" onclick="showLogin(); return false;">Войти</a>
+                    </p>
+                </div>
             </div>
         </div>
     </div>
@@ -65,9 +68,9 @@
     <!-- Главный экран -->
     <div id="main-screen" class="screen">
         <div class="header">
-            <h1>Портал для врачей</h1>
+            <h1>🏥 MedPortal</h1>
             <div class="user-info">
-                <span id="doctor-name"></span>
+                <span>👤 <span id="doctor-name"></span></span>
                 <button onclick="logout()" class="btn btn-secondary">Выйти</button>
             </div>
         </div>
@@ -75,45 +78,67 @@
         <div class="content">
             <!-- Боковая панель -->
             <div class="sidebar">
-                <button onclick="showPatientsList()" class="btn btn-primary btn-block">Список пациентов</button>
-                <button onclick="showAddPatient()" class="btn btn-success btn-block">Добавить пациента</button>
+                <div class="nav-item active" onclick="showPatientsList()">
+                    📋 Список пациентов
+                </div>
+                <div class="nav-item" onclick="showAddPatient()">
+                    ➕ Добавить пациента
+                </div>
             </div>
 
             <!-- Основной контент -->
             <div class="main-content">
                 <!-- Список пациентов -->
                 <div id="patients-list-view" class="view active">
-                    <h2>Мои пациенты</h2>
-                    <div id="patients-list"></div>
+                    <div class="page-header">
+                        <h2>Мои пациенты</h2>
+                    </div>
+
+                    <div class="search-bar">
+                        <input type="text"
+                               class="search-input"
+                               id="patient-search"
+                               placeholder="🔍 Поиск пациентов по имени, телефону или email..."
+                               oninput="filterPatients()">
+                    </div>
+
+                    <div id="patients-list" class="patients-grid"></div>
                 </div>
 
                 <!-- Добавление пациента -->
                 <div id="add-patient-view" class="view">
-                    <h2>Добавить пациента</h2>
-                    <form onsubmit="handleAddPatient(event)">
-                        <div class="form-group">
-                            <label for="patient-name">ФИО пациента</label>
-                            <input type="text" id="patient-name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="patient-dob">Дата рождения</label>
-                            <input type="date" id="patient-dob">
-                        </div>
-                        <div class="form-group">
-                            <label for="patient-phone">Телефон</label>
-                            <input type="tel" id="patient-phone">
-                        </div>
-                        <div class="form-group">
-                            <label for="patient-email">Email</label>
-                            <input type="email" id="patient-email">
-                        </div>
-                        <div class="form-group">
-                            <label for="patient-history">Анамнез</label>
-                            <textarea id="patient-history" rows="4"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-success">Добавить</button>
-                        <button type="button" onclick="showPatientsList()" class="btn btn-secondary">Отмена</button>
-                    </form>
+                    <div class="page-header">
+                        <h2>➕ Добавить пациента</h2>
+                    </div>
+
+                    <div class="section">
+                        <form onsubmit="handleAddPatient(event)">
+                            <div class="form-group">
+                                <label for="patient-name">ФИО пациента *</label>
+                                <input type="text" id="patient-name" placeholder="Введите ФИО пациента" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="patient-dob">Дата рождения</label>
+                                <input type="date" id="patient-dob">
+                            </div>
+                            <div class="form-group">
+                                <label for="patient-phone">Телефон</label>
+                                <input type="tel" id="patient-phone" placeholder="+7 (___) ___-__-__">
+                            </div>
+                            <div class="form-group">
+                                <label for="patient-email">Email</label>
+                                <input type="email" id="patient-email" placeholder="email@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="patient-history">Анамнез</label>
+                                <textarea id="patient-history" rows="6" placeholder="Введите анамнез пациента..."></textarea>
+                            </div>
+                            <div style="display: flex; gap: 12px;">
+                                <button type="submit" class="btn btn-success">💾 Добавить пациента</button>
+                                <button type="button" onclick="showPatientsList()" class="btn btn-secondary">❌ Отмена</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
 
                 <!-- Детали пациента -->
@@ -123,6 +148,9 @@
             </div>
         </div>
     </div>
+
+    <!-- Контейнер для уведомлений -->
+    <div id="notifications"></div>
 
     <script src="app.js"></script>
 </body>
